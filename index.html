@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapak Motor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images.jpeg'); /* Ganti dengan path ke gambar background motor Anda */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        #menu {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+        #menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #menu ul li {
+            display: inline;
+            padding: 10px;
+        }
+        #menu ul li:hover {
+            background-color: rgba(0, 255, 76, 0.2);
+            cursor: pointer;
+        }
+        #submenu {
+            display: none;
+            position: absolute;
+            background-color: rgb(255, 0, 0);
+            padding: 10px;
+        }
+        #submenu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #submenu ul li {
+            padding: 5px 0;
+        }
+        #contact-form {
+            display: none;
+            background-color: rgba(255, 81, 0, 0.5);
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #contact-form input[type="text"], #contact-form input[type="email"], #contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        #contact-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #product-details {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li onmouseover="showSubMenu('yamaha')">Yamaha</li>
+            <li onmouseover="showSubMenu('honda')">Honda</li>
+            <li onmouseover="showSubMenu('kawasaki')">Kawasaki</li>
+            <li onmouseover="showSubMenu('suzuki')">Suzuki</li>
+            <li onclick="showContactForm()">Contact</li>
+        </ul>
+    </div>
+    <div id="submenu">
+        <ul id="submenu-yamaha" style="display:none;">
+            <li onclick="showProductDetails('Yamaha Mio', 'Yamaha Mio M3 125 tersedia dalam pilihan mesin Petrol di Indonesia Scooter baru dari Yamaha hadir dalam 1 varian. Bicara soal spesifikasi mesin Yamaha Mio M3 125, ini ditenagai dua pilihan mesin Petrol berkapasitas 125 cc. Mio M3 125 tersedia dengan transmisi CVT tergantung variannya. Mio M3 125 adalah Scooter 2 seater dengan panjang 1870 mm, lebar 685 mm, wheelbase 1260 mm. serta ground clearance 135 mm..')">Yamaha Mio</li>
+            <li onclick="showProductDetails('Yamaha NMax', 'Yamaha Nmax tersedia dalam pilihan mesin Petrol di Indonesia Scooter baru dari Yamaha hadir dalam 1 varian. Bicara soal spesifikasi mesin Yamaha Nmax, ini ditenagai dua pilihan mesin Petrol berkapasitas 155 cc. Nmax tersedia dengan transmisi CVT tergantung variannya. Nmax adalah Scooter 2 seater dengan panjang 1955 mm, lebar 740 mm, wheelbase 1350 mm. serta ground clearance 124 mm..')">Yamaha NMax</li>
+            <!-- Tambahkan motor Yamaha lainnya di sini -->
+        </ul>
+        <ul id="submenu-honda" style="display:none;">
+            <li onclick="showProductDetails('Honda Supra', 'Honda Supra X 125 FI tersedia dalam pilihan mesin Petrol di Indonesia Moped baru dari Honda hadir dalam 2 varian. Bicara soal spesifikasi mesin Honda Supra X 125 FI, ini ditenagai dua pilihan mesin Petrol berkapasitas 124.89 cc. Supra X 125 FI tersedia dengan transmisi Manual tergantung variannya. Supra X 125 FI adalah Moped 2 seater dengan panjang 1918 mm, lebar 709 mm, wheelbase 1235 mm.')">Honda Supra</li>
+            <li onclick="showProductDetails('Honda CBR', 'Honda CBR150R tersedia dalam pilihan mesin Petrol di Indonesia Sport baru dari Honda hadir dalam 5 varian. Bicara soal spesifikasi mesin Honda CBR150R, ini ditenagai dua pilihan mesin Petrol berkapasitas 149.16 cc. CBR150R tersedia dengan transmisi Manual tergantung variannya. CBR150R adalah Sport 2 seater dengan panjang 1983 mm, lebar 700 mm, wheelbase 1310 mm. serta ground clearance 160 mm..')">Honda CBR</li>
+            <!-- Tambahkan motor Honda lainnya di sini -->
+        </ul>
+        <ul id="submenu-kawasaki" style="display:none;">
+            <li onclick="showProductDetails('Kawasaki Ninja', 'Kawasaki Ninja 250 tersedia dalam pilihan mesin Petrol di Indonesia Sport baru dari Kawasaki hadir dalam 3 varian. Bicara soal spesifikasi mesin Kawasaki Ninja 250, ini ditenagai dua pilihan mesin Petrol berkapasitas 249 cc. Ninja 250 tersedia dengan transmisi Manual tergantung variannya. Ninja 250 adalah Sport 2 seater dengan panjang 1990 mm, lebar 710 mm, wheelbase 1370 mm. serta ground clearance 145 mm..')">Kawasaki Ninja</li>
+            <li onclick="showProductDetails('Kawasaki Z250', 'LKawasaki Z250 tersedia dalam pilihan mesin Petrol di Indonesia Sport baru dari Kawasaki hadir dalam 2 varian. Bicara soal spesifikasi mesin Kawasaki Z250, ini ditenagai dua pilihan mesin Petrol berkapasitas 249 cc. Z250 tersedia dengan transmisi Manual tergantung variannya. Z250 adalah Sport 2 seater dengan panjang 2010 mm, lebar 750 mm, wheelbase 1400 mm. serta ground clearance 145 mm..')">Kawasaki Z250</li>
+            <!-- Tambahkan motor Kawasaki lainnya di sini -->
+        </ul>
+        <ul id="submenu-suzuki" style="display:none;">
+            <li onclick="showProductDetails('Suzuki Satria', 'Suzuki Satria F150 tersedia dalam pilihan mesin Petrol di Indonesia Scooter baru dari Suzuki hadir dalam 1 varian. Bicara soal spesifikasi mesin Suzuki Satria F150, ini ditenagai dua pilihan mesin Petrol berkapasitas 147.3 cc. Satria F150 tersedia dengan transmisi Manual tergantung variannya. Satria F150 adalah Scooter 2 seater dengan panjang 1960 mm, lebar 675 mm, wheelbase 1280 mm. serta ground clearance 150 mm..')">Suzuki Satria</li>
+            <li onclick="showProductDetails('Suzuki GSX', 'Suzuki GSX R150 tersedia dalam pilihan mesin Petrol di Indonesia Sport baru dari Suzuki hadir dalam 2 varian. Bicara soal spesifikasi mesin Suzuki GSX R150, ini ditenagai dua pilihan mesin Petrol berkapasitas 147.3 cc. GSX R150 tersedia dengan transmisi Manual tergantung variannya. GSX R150 adalah Sport 2 seater dengan panjang 2020 mm, lebar 700 mm, wheelbase 1300 mm. serta ground clearance 160 mm..')">Suzuki GSX</li>
+            <!-- Tambahkan motor Suzuki lainnya di sini -->
+        </ul>
+    </div>
+    <div id="contact-form">
+        <h2>Contact Form</h2>
+        <form>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Question"></textarea>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="product-details">
+        <h2>Product Details</h2>
+        <p id="product-name"></p>
+        <p id="product-specs"></p>
+    </div>
+
+    <script>
+        function showSubMenu(brand) {
+            var submenu = document.getElementById('submenu');
+            submenu.style.display = 'block';
+
+            var submenuItems = document.querySelectorAll('#submenu ul');
+            submenuItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            var selectedSubMenu = document.getElementById('submenu-' + brand);
+            selectedSubMenu.style.display = 'block';
+        }
+
+        function showProductDetails(productName, productSpecs) {
+            var productDetails = document.getElementById('product-details');
+            productDetails.style.display = 'block';
+
+            var productNameElement = document.getElementById('product-name');
+            productNameElement.innerText = 'Product: ' + productName;
+
+            var productSpecsElement = document.getElementById('product-specs');
+            productSpecsElement.innerText = 'Specifications: ' + productSpecs;
+        }
+
+        function showContactForm() {
+            var contactForm = document.getElementById('contact-form');
+            contactForm.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
